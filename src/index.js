@@ -15,7 +15,6 @@ var root = {
 
 var query = '{item{author{name,address},article{title,source,like}}}'
 
-
 graphql.graphql(schema, query, root).then(function(res) {
 	var result = {
 		story: [],
