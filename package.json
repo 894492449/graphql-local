@@ -1,0 +1,17 @@
+{
+  "name": "graphql-local",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql": "^0.10.3",
+    "handlebars": "^4.0.10",
+    "handlebars-loader": "^1.5.0",
+    "mock": "^0.1.1"
+  }
+}
