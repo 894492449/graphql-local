@@ -10,9 +10,12 @@ var schema = graphql.buildSchema(`
 		name:String,
 		address:String
 	},
-	type Query{
+	type Item{
 		author:[Person],
 		article:[Message]
+	}
+	type Query{
+		item:Item
 	}
 `)
 

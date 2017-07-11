@@ -11860,39 +11860,48 @@ exports.logger = _logger2['default'];
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var graphql =__webpack_require__(33);
+var graphql = __webpack_require__(33);
 
-var data=__webpack_require__(89);
-var schema=__webpack_require__(91);
-var tem=__webpack_require__(92);
+var data = __webpack_require__(89);
+var schema = __webpack_require__(91);
+var tem = __webpack_require__(92);
 
 var root = {
-	author:()=>{
-		return data.authorData.author
-	},
-	article:()=>{
-		return data.articleData.article
+	// item:function(){
+	// 	return {
+	// 		author:function(){
+	// 			return data.authorData.author
+	// 		},
+	// 		article:function(){
+	// 			return data.articleData.article
+	// 		}
+	// 	}
+	// }
+	item:()=>{
+		return {
+			author:()=>data.authorData.author,
+			article:()=>data.articleData.article
+		}
 	}
 }
 
-var query='{author{name,address},article{title,source,like}}'
+var query = '{item{author{name,address},article{title,source,like}}}'
 
-graphql.graphql(schema,query,root).then(function(res){
-	var result={
-		story:[],
+
+graphql.graphql(schema, query, root).then(function(res) {
+	var result = {
+		story: [],
 	};
-	res.data.article.forEach((e,index)=>{
-		e.by = res.data.author[index].name;
-		e.address=res.data.author[index].address;
+	res.data.item.article.forEach((e, index) => {
+		e.by = res.data.item.author[index].name;
+		e.address = res.data.item.author[index].address;
 		result.story.push(e);
 	});
-	var html=tem({
-		result:result
+	var html = tem({
+		result: result
 	});
 	document.getElementById('app').innerHTML = html
 })
-
-
 
 /***/ }),
 /* 67 */
@@ -23934,9 +23943,12 @@ var schema = graphql.buildSchema(`
 		name:String,
 		address:String
 	},
-	type Query{
+	type Item{
 		author:[Person],
 		article:[Message]
+	}
+	type Query{
+		item:Item
 	}
 `)
 
